@@ -1,14 +1,13 @@
 
 
 class Person:
-    def __init__(self, firstname, lastname, address, cc, phone, personid):
+    def __init__(self, firstname, lastname, address, cc, phone):
 
         self.__firstname = firstname
         self.__lastname = lastname
         self.__address = address
         self.__cc = cc
         self.__phone = phone
-        self.__personid = personid
     
 
 
@@ -81,19 +80,6 @@ class Person:
     @phone.deleter
     def phone(self):
         self.__phone = None
-
-    #personid encapsulate
-    @property
-    def personid(self):
-        return self.__personid
-
-    @personid.setter
-    def personid(self, personid):
-        self.__personid = personid
-
-    @personid.deleter
-    def personid(self):
-        self.__personid = None
 
     def __str__(self):
         return  self.firstname + ' ' + self.lastname + ' ' + f'\n ID: {self.personid}'

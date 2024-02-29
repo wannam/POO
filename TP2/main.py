@@ -47,13 +47,11 @@ def main():
                 address = input('Address: ')
                 cc = input('CC: ')
                 phone = input('Phone Number: ')
-                personid = (len(list_of_persons)) + 1
-                new_person = Person(firstname, lastname, address, cc, phone, personid)
+                new_person = Person(firstname, lastname, address, cc, phone)
                 list_of_persons.append(new_person)
 
             case "2":
                 print_list(list_of_persons)
-                print(list_of_persons[0].__dict__)
 
             case "3":
                 fuel = input('Fuel: ')
@@ -64,8 +62,7 @@ def main():
                 system = input('Starting system: ')
                 weight = input('Weight: ')
                 manufacturer = input('Manufacturer: ')
-                engineid = f'{(len(list_of_engines)) + 1}'
-                new_engine = Engine(fuel, power, torque, displacement, clylinders, system, weight, manufacturer, engineid)
+                new_engine = Engine(fuel, power, torque, displacement, clylinders, system, weight, manufacturer)
                 list_of_engines.append(new_engine)
 
             case "4":
@@ -73,9 +70,10 @@ def main():
 
             case "5":
                 namecolor = input('Color: ')
-                rgb = int(input('RGB: '))
-                colorid = f'{(len(list_of_colors)) + 1}'
-                new_color = Color(namecolor, rgb, colorid)
+                r = int(input('R: '))
+                g = int(input('G: '))
+                b = int(input('B: '))
+                new_color = Color(namecolor, r, g, b)
                 list_of_colors.append(new_color)
 
             case "6":

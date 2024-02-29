@@ -1,7 +1,7 @@
 
 
 class Engine:
-    def __init__(self, fuel, power, torque, displacement, clylinders, system, weight, manufacturer, engineid):
+    def __init__(self, fuel, power, torque, displacement, clylinders, system, weight, manufacturer):
         
         self.fuel = fuel
         self.power = power
@@ -11,7 +11,6 @@ class Engine:
         self.system = system
         self.weight = weight
         self.manufacturer = manufacturer
-        self.engineid = engineid
 
 
     #fuel encapsulate
@@ -112,19 +111,6 @@ class Engine:
     def weight(self):
         self.__weight = None
 
-
-    #manufacturer encapsulate
-    @property
-    def manufacturer(self):
-        return self.__manufacturer
-
-    @manufacturer.setter
-    def manufacturer(self, manufacturer):
-        self.__manufacturer = manufacturer
-
-    @manufacturer.deleter
-    def manufacturer(self):
-        self.__manufacturer = None
 
     #manufacturer encapsulate
     @property
