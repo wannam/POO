@@ -4,7 +4,7 @@ class Empregado(Pessoa):
 
     lista_empregados = []
 
-    def __init__(self, nome, morada, telefone, idpessoa, codigo_setor, salario_base=1200, imposto=10):
+    def __init__(self, nome, morada, telefone, idpessoa, codigo_setor, salario_base=1200.0, imposto=10):
         super().__init__(nome, morada, telefone, idpessoa)
         self.__codigo_setor = codigo_setor
         self.__salario_base = salario_base

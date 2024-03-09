@@ -9,18 +9,13 @@ def main():
     while True:
     
 
-        print(" " * 12,"Menu")
-        print("-" * 30)
-        print("1 - Novo Empregado")
-        print("2 - Lista de Empregados")
+        
+        print(" " * 11, "Menu")
+        print("| 1 - Novo Empregado")
+        print("| 2 - Lista de Empregados")
+        print("| 3 - Calcular Sálario")
 
-        print("3 - Editar Empregado")
-        print("4 - Deletar Empregado")
-
-        print("5 - Calcular Sálario")
-        print("-" * 30)
-
-        op = input("Op? ").lower()
+        op = input("\nOp? ").lower()
         print(" ")
 
         match op:
@@ -52,13 +47,7 @@ def main():
                 input("\nENTER para sair ao menu")
                 print(" ")
 
-
-
             case "3":
-                print_list(Empregado.lista_empregados)
-
-
-            case "5":
                 print_list(Empregado.lista_empregados)
                 empregado_id = input("ID do empregado: ")
                 find_by_id(empregado_id)
@@ -74,15 +63,18 @@ def find_by_id(empregado_id):
     for vendedor in Vendedor.lista_vendedores:
         if vendedor.idpessoa == empregado_id:
             empregado = vendedor
-            empregado.valor_vendas = int(input("Total de vendas: "))
+            empregado.valor_vendas = float(input("\nTotal de vendas: "))
             break
     if empregado:
         salario = empregado.calcular_salario()
         print(" ")
+        print(f"|Nome: {(empregado.nome).title()} | id: {empregado.idpessoa}")
         if empregado.codigo_setor == 1:
-            print(f"O Salário Liquido de {(empregado.nome).title()} é: {salario}€\nSalário Base:{empregado.salario_base}\nImposto:{empregado.imposto}\nAjuda de custo: {empregado.ajuda_de_custo}")
+            print("\n|Administrador")
+            print(f"|Salário Base:{empregado.salario_base}\n|Imposto:{empregado.imposto}%\n|Ajuda de custo: {empregado.ajuda_de_custo}\n|\n|Salário Liquido: {salario}€")
         if empregado.codigo_setor == 2:
-            print(f"O Salário Liquido de {(empregado.nome).title()} é: {salario}€\nSalário Base:{empregado.salario_base}\nImposto:{empregado.imposto}\nValor de Vendas: {empregado.valor_vendas}€\nComissão: {empregado.comissao}")
+            print("|Vendedor")
+            print(f"|Salário Base:{empregado.salario_base}\n|Imposto:{empregado.imposto}%\n|Valor de Vendas: {empregado.valor_vendas}€\n|Comissão: {empregado.comissao}%\n|\n|Salário Liquido: {salario}€")
         
     else:
         print("Empregado não encontrado.")
@@ -125,24 +117,23 @@ def load_lista(load_lista):
     except FileNotFoundError:
         print('Lista não existe')
 
-            
+
                 
 def print_list(list_of):
     if list_of == Empregado.lista_empregados or Pessoa.lista_pessoas or Administrador.lista_adms or Vendedor.lista_vendedores:
         
-        i = 1
-        print(" " * 16,"EMPREGADOS")
+        print(" " * 15,"EMPREGADOS")
+        print("-" * 45)
+        print("Nome ", " " * 8, "| ID", " " * 3, "| Setor")
         print("-" * 45)
         if (len(list_of)) == 0:
             print('Não há itens nesta lista')
         else:    
             for item in list_of:
                 if item.codigo_setor == 1:
-                    print(f'{i} - {(item.nome).title()}| id:{item.idpessoa} | {item.codigo_setor} - Administrador')
-                    i += 1
+                    print("{:<15}| {:<7}| {:<10}".format((item.nome).title(), item.idpessoa, f"{item.codigo_setor} - Administrador" ))
                 if item.codigo_setor == 2:
-                    print(f'{i} - {(item.nome).title()}| id:{item.idpessoa} | {item.codigo_setor} - Vendedor')
-                    i += 1
+                    print("{:<15}| {:<7}| {:<10}".format((item.nome).title(), item.idpessoa, f"{item.codigo_setor} - Vendedor" ))
         print("-" * 45)
 
 
