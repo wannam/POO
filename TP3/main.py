@@ -9,8 +9,8 @@ def main():
     while True:
     
 
-        print("Menu")
-
+        print(" " * 12,"Menu")
+        print("-" * 30)
         print("1 - Novo Empregado")
         print("2 - Lista de Empregados")
 
@@ -18,15 +18,17 @@ def main():
         print("4 - Deletar Empregado")
 
         print("5 - Calcular Sálario")
+        print("-" * 30)
 
         op = input("Op? ").lower()
+        print(" ")
 
         match op:
             case "1":
                 nome = input("Nome: ")
                 morada = input("Morada: ")
                 telefone = input("Telefone: ")
-                idpessoa = (len(Empregado.lista_empregados))+1
+                idpessoa = (f'{len(Empregado.lista_empregados)+1}{telefone[0:2]}')
                 new_person = Pessoa(nome, morada, telefone, idpessoa)
                 Pessoa.lista_pessoas.append(new_person)
                 print('1-Admistrador\n2-Vendedor')
@@ -46,30 +48,42 @@ def main():
 
             case "2":
                 load_lista(Empregado.lista_empregados)
-   
+                print_list(Empregado.lista_empregados)
+                input("\nENTER para sair ao menu")
+                print(" ")
+
+
 
             case "3":
                 print_list(Empregado.lista_empregados)
 
 
             case "5":
-                empregado_nome = input("Nome do Empregado: ")
-                find_empregado_by_name(empregado_nome)
+                print_list(Empregado.lista_empregados)
+                empregado_id = input("ID do empregado: ")
+                find_by_id(empregado_id)
+                input("\nENTER para sair ao menu")
 
-def find_empregado_by_name(empregado_nome):
+
+def find_by_id(empregado_id):
     empregado = None
     for adm in Administrador.lista_adms:
-        if adm.nome == empregado_nome:
+        if adm.idpessoa == empregado_id:
             empregado = adm
             break
     for vendedor in Vendedor.lista_vendedores:
-        if vendedor.nome == empregado_nome:
+        if vendedor.idpessoa == empregado_id:
             empregado = vendedor
             empregado.valor_vendas = int(input("Total de vendas: "))
             break
     if empregado:
         salario = empregado.calcular_salario()
-        print(f"O Salário Liquido de {empregado_nome} é: {salario}€")
+        print(" ")
+        if empregado.codigo_setor == 1:
+            print(f"O Salário Liquido de {(empregado.nome).title()} é: {salario}€\nSalário Base:{empregado.salario_base}\nImposto:{empregado.imposto}\nAjuda de custo: {empregado.ajuda_de_custo}")
+        if empregado.codigo_setor == 2:
+            print(f"O Salário Liquido de {(empregado.nome).title()} é: {salario}€\nSalário Base:{empregado.salario_base}\nImposto:{empregado.imposto}\nValor de Vendas: {empregado.valor_vendas}€\nComissão: {empregado.comissao}")
+        
     else:
         print("Empregado não encontrado.")
               
@@ -115,13 +129,22 @@ def load_lista(load_lista):
                 
 def print_list(list_of):
     if list_of == Empregado.lista_empregados or Pessoa.lista_pessoas or Administrador.lista_adms or Vendedor.lista_vendedores:
+        
         i = 1
+        print(" " * 16,"EMPREGADOS")
+        print("-" * 45)
         if (len(list_of)) == 0:
             print('Não há itens nesta lista')
         else:    
             for item in list_of:
-                print(f'{i} - {item}')
-                i += 1
+                if item.codigo_setor == 1:
+                    print(f'{i} - {(item.nome).title()}| id:{item.idpessoa} | {item.codigo_setor} - Administrador')
+                    i += 1
+                if item.codigo_setor == 2:
+                    print(f'{i} - {(item.nome).title()}| id:{item.idpessoa} | {item.codigo_setor} - Vendedor')
+                    i += 1
+        print("-" * 45)
+
 
 if __name__ == "__main__":
     main()
